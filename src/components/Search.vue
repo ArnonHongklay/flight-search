@@ -62,37 +62,40 @@
     </div>
     <div class="result col-12 text-left">
       <h2>Result</h2>
-      <!-- {{output}} -->
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">bookingKey</th>
-            <th scope="col">searchType</th>
-            <th scope="col">flightType</th>
-            <th scope="col">from</th>
-            <th scope="col">to</th>
-            <th scope="col">isPopular</th>
-            <th scope="col">isRecommended</th>
-            <!-- <th>journeys</th> -->
-            <!-- <th>fareDetail</th> -->
-            <th>identifier</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="flight in flights" v-bind:key="flight">
-            <td>{{ flight.bookingKey }}</td>
-            <td>{{ flight.searchType }}</td>
-            <td>{{ flight.flightType }}</td>
-            <td>{{ flight.from }}</td>
-            <td>{{ flight.to }}</td>
-            <td>{{ flight.isPopular }}</td>
-            <td>{{ flight.isRecommended }}</td>
-            <!-- <td>{{ flight.journeys }}</td> -->
-            <!-- <td>{{ flight.fareDetail }}</td> -->
-            <td>{{ flight.identifier }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">bookingKey</th>
+              <th scope="col">searchType</th>
+              <th scope="col">flightType</th>
+              <th scope="col">from</th>
+              <th scope="col">to</th>
+              <th scope="col">isPopular</th>
+              <th scope="col">isRecommended</th>
+              <!-- <th>journeys</th> -->
+              <th>fullPrice</th>
+              <th>identifier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="flight in flights" v-bind:key="flight.bookingKey">
+              <td>
+                <a href="#" v-on:click="goToPayment(flight.bookingKey)">{{ flight.bookingKey }}</a>
+              </td>
+              <td>{{ flight.searchType }}</td>
+              <td>{{ flight.flightType }}</td>
+              <td>{{ flight.from }}</td>
+              <td>{{ flight.to }}</td>
+              <td>{{ flight.isPopular }}</td>
+              <td>{{ flight.isRecommended }}</td>
+              <!-- <td>{{ flight.journeys }}</td> -->
+              <td>{{ flight.fareDetail.routeFare.fullPrice }}</td>
+              <td>{{ flight.identifier }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -105,21 +108,39 @@ export default {
   },
   data: function() {
     return {
-      destination: "",
+      destination: "CNX",
       guests: 1,
       children: 0,
-      check_in: "",
+      check_in: this.today(),
       check_out: "",
       flights: []
     };
   },
   methods: {
+    today: function() {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+      var yyyy = today.getFullYear();
+
+      return yyyy + "-" + mm + "-" + dd;
+    },
+    goToPayment: function(bookingKey) {
+      this.$router.push({
+        name: "Payment",
+        params: { bookingKey: bookingKey }
+      });
+    },
     formSubmit: function(e) {
       this.errors = {};
       console.log(e);
       this.axios
         .get(
-          "https://dev-services.travizgo.com/flight/api/search?adultCount=1&childCount=0&infantCount=0&cabinClass=ECONOMY&currency=THB&from=BKK&fromPreferCity=true&to=JFK&toPreferCity=false&per_page=50&departureDate=2021-01-13&airlines"
+          "https://dev-services.travizgo.com/flight/api/search?adultCount=1&childCount=0&infantCount=0&cabinClass=ECONOMY&currency=THB&from=BKK&fromPreferCity=true&to=" +
+            this.destination +
+            "&toPreferCity=false&per_page=300&departureDate=" +
+            this.check_in +
+            "&airlines"
         )
         .then(response => {
           this.flights = response.data.data.data_list;

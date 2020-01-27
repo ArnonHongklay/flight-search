@@ -1,26 +1,19 @@
 <template>
   <div id="app">
-    <!-- <div id="booking" class="section">
-    <div class="section-center">-->
     <div class="container">
-      <Search msg="Welcome to Your Vue.js App" />
-      <Result />
+      <!-- <nav>
+        <router-link to="/search">Search</router-link>
+        <router-link to="/payment">Payment</router-link>
+      </nav>-->
+      <router-view />
     </div>
-    <!-- </div>
-    </div>-->
   </div>
 </template>
 
 <script>
-import Search from "./components/Search.vue";
-// import Result from "./components/Result.vue";
-
 export default {
   name: "app",
-  components: {
-    Search
-    // Result
-  }
+  components: {}
 };
 </script>
 
