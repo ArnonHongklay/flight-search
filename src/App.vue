@@ -1,29 +1,32 @@
 <template>
   <div id="app">
-  <div id="booking" class="section">
-    <div class="section-center">
-      <div class="container">
-        <HelloWorld msg="Welcome to Your Vue.js App"/>
-      </div>
+    <!-- <div id="booking" class="section">
+    <div class="section-center">-->
+    <div class="container">
+      <Search msg="Welcome to Your Vue.js App" />
+      <Result />
     </div>
-  </div>
+    <!-- </div>
+    </div>-->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Search from "./components/Search.vue";
+// import Result from "./components/Result.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    Search
+    // Result
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
