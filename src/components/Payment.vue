@@ -9,6 +9,7 @@
     <b-tabs card>
       <b-tab title="Credit Card" active>
         <b-card-text>
+          <h3>Credit Card</h3>
           <img src="https://p-a.popcdn.net/assets/cards-logo/mastercard-34a3ea8182b6a8e76a1e22363cbe6baf2f02f7d02e5629c9e367cb75f281e9af.png" alt="">
           <p>
             The credit card statement will display as Omise*EVENTPOP
@@ -18,8 +19,9 @@
           </p>
         </b-card-text>
       </b-tab>
-      <b-tab title="Bill Payment" >
-        <b-card-text>Bill Payment
+      <b-tab title="K PLUS" >
+        <b-card-text>
+          <h3>K PLUS</h3>
 
           <pre>
             Before continue, please turn on K Plus Application notification.
