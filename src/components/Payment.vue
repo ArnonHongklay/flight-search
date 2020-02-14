@@ -9,11 +9,6 @@
             <b-tab title="Credit Card" active>
               <b-card-text>
                 <h3>Credit Card</h3>
-                <img
-                  src="https://p-a.popcdn.net/assets/cards-logo/mastercard-34a3ea8182b6a8e76a1e22363cbe6baf2f02f7d02e5629c9e367cb75f281e9af.png"
-                  alt
-                />
-                <p>Activate your KTB, Bangkok Bank, SCB, KBank, Bank of Ayudhya, Thanachart Bank Debit Card: See instructions here.</p>
                 <CardForm
                   :form-data="formData"
                   @input-card-number="updateCardNumber"
@@ -22,15 +17,13 @@
                   @input-card-year="updateCardYear"
                   @input-card-cvv="updateCardCvv"
                 />
+                <p>Activate your KTB, Bangkok Bank, SCB, KBank, Bank of Ayudhya, Thanachart Bank Debit Card: See instructions here.</p>
               </b-card-text>
             </b-tab>
             <b-tab title="K PLUS">
               <b-card-text>
                 <h3>K PLUS</h3>
-
-                <pre>
-                  Before continue, please turn on K Plus Application notification.
-                </pre>
+                <p>Before continue, please turn on K Plus Application notification.</p>
                 <p>
                   Please enter Mobile Number that linked to your K Plus Account K plus
                   <img

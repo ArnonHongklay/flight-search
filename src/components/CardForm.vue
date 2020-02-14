@@ -221,25 +221,50 @@ export default {
       this.$emit('input-card-cvv', this.formData.cardCvv)
     },
     invaildCard () {
-      let number = this.formData.cardNumber
-      let sum = 0
-      let isOdd = true
-      for (let i = number.length - 1; i >= 0; i--) {
-        let num = number.charAt(i)
-        if (isOdd) {
-          sum += num
-        } else {
-          num = num * 2
-          if (num > 9) {
-            num = num.toString().split('').join('+')
-          }
-          sum += num
-        }
-        isOdd = !isOdd
-      }
-      if (sum % 10 !== 0) {
-        alert('invaild card number')
-      }
+      // let number = this.formData.cardNumber
+      // let sum = 0
+      // let isOdd = true
+      // for (let i = number.length - 1; i >= 0; i--) {
+      //   let num = number.charAt(i)
+      //   if (isOdd) {
+      //     sum += num
+      //   } else {
+      //     num = num * 2
+      //     if (num > 9) {
+      //       num = num.toString().split('').join('+')
+      //     }
+      //     sum += num
+      //   }
+      //   isOdd = !isOdd
+      // }
+      // if (sum % 10 !== 0) {
+      //   alert('invaild card number')
+      // }
+
+      let cardInformation = {
+        name:             this.formData.cardName,
+        number:           this.formData.cardNumber,
+        expiration_month: this.formData.cardMonth,
+        expiration_year:  this.formData.cardYear,
+        security_code:    this.formData.cardCvv
+      };
+
+      let card = ''
+
+      // eslint-disable-next-line no-undef
+      window.Omise.createToken("card",
+        cardInformation,
+        function (statusCode, response) {
+          card = response
+        console.log(response)
+      });
+
+      this.axios
+        .post("http://localhost:1337/api/payment", { params: { card: card, booking: this.$route.params.bookingKey } })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => { console.log(error)});
     },
     blurCardNumber () {
       if (this.isCardNumberMasked) {

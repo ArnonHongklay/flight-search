@@ -136,7 +136,7 @@ export default {
       console.log(e);
       this.axios
         .get(
-          "https://dev-services.travizgo.com/flight/api/search?adultCount=1&childCount=0&infantCount=0&cabinClass=ECONOMY&currency=THB&from=BKK&fromPreferCity=true&to=" +
+          "http://178.128.19.42/api/search?adultCount=1&childCount=0&infantCount=0&cabinClass=ECONOMY&currency=THB&from=BKK&fromPreferCity=true&to=" +
             this.destination +
             "&toPreferCity=false&per_page=300&departureDate=" +
             this.check_in +
@@ -175,6 +175,10 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.booking-form {
+  margin-top: 40px;
 }
 
 .result {
