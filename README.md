@@ -1,4 +1,4 @@
-# demo
+# Flight Search
 
 ## Project setup
 ```
